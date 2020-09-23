@@ -44,8 +44,9 @@ func ValidateCertificateSpec(crt *internalcmapi.CertificateSpec, fldPath *field.
 		el = append(el, field.Invalid(fldPath, "", "at least one of commonName, dnsNames, uris or emailAddresses must be set"))
 	}
 
-	// if a common name has been specified, ensure it is no longer than 64 chars
-	if len(crt.CommonName) > 64 {
+	// if a common name has been specified and is a non-spiffe name, ensure it is no longer than 64 chars
+	// custom patch: Written by Bose BPC Team
+	if len(crt.CommonName) > 64 && crt.CommonName[:9] != "spiffe://" {
 		el = append(el, field.TooLong(fldPath.Child("commonName"), crt.CommonName, 64))
 	}
 

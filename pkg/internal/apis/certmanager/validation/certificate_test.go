@@ -370,6 +370,17 @@ func TestValidateCertificate(t *testing.T) {
 				field.TooLong(fldPath.Child("commonName"), "this-is-a-big-long-string-which-has-exactly-sixty-five-characters", 64),
 			},
 		},
+		// custom patch: Written by Bose BPC Team
+		"valid certificate with spiffe commonName longer than 64 bytes": {
+			cfg: &internalcmapi.Certificate{
+				Spec: internalcmapi.CertificateSpec{
+					CommonName: "spiffe://this-is-a-big-long-string-which-has-more-than-sixty-four-characters",
+					SecretName: "abc",
+					IssuerRef:  validIssuerRef,
+				},
+			},
+			errs: []*field.Error{},
+		},
 		"valid certificate with no commonName and second dnsName longer than 64 bytes": {
 			cfg: &internalcmapi.Certificate{
 				Spec: internalcmapi.CertificateSpec{

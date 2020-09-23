@@ -13,8 +13,8 @@
 # limitations under the License.
 
 # Set DOCKER_REGISTRY to customise the image docker repo, e.g. "quay.io/jetstack"
-DOCKER_REGISTRY :=
-APP_VERSION :=
+DOCKER_REGISTRY := cert-nonprod-registry.cert-aws-useast1.bose.io/core-platform/cert-manager
+APP_VERSION := patch.v1.0.2
 HACK_DIR ?= hack
 
 SKIP_GLOBALS := false
