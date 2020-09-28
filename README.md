@@ -20,6 +20,24 @@ and has borrowed some wisdom from other similar projects e.g.
 
 ![cert-manager high level overview diagram](https://cert-manager.io/images/high-level-overview.svg)
 
+## Bose Specific Documentation
+
+### Building Images
+
+You need [bazel](https://bazel.build/) for building cert-manager images. If you don't already have it, please follow this [guide](https://docs.bazel.build/versions/master/install-os-x.html) to install bazel on your machine. 
+
+Once you have bazel installed, to build an image clone this repository.
+
+If you want add tests to existing test suite, please do so [here](https://github.com/BoseCorp/cert-manager/blob/master/pkg/internal/apis/certmanager/validation/certificate_test.go)
+
+cd into home directory.
+
+Run `make build` to build all the images (cert-manager-controller, cert-manager-cainjector, cert-manager-webhook).
+
+Once you have build all the images, tag the images in the following format: `registry/core-platform/cert-manager-controller-v1-0-2:patch.v1` where v1-0-2 is the version of the upstream cert-manager we are using and patch.v1 is the tag we are giving to our version of cert-manager. 
+
+
+
 ## Documentation
 
 Documentation for cert-manager can be found at [cert-manager.io](https://cert-manager.io/docs/).
